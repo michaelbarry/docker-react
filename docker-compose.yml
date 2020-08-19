@@ -1,0 +1,22 @@
+# docker run  -p 3000:3000 -v /app/node_modues -v $(pwd):/app 821e3508b5e7
+version: '3'
+services: 
+    web:
+        stdin_open: true # required to keep app running (a bug fix)
+        build: 
+            context: . # location of Dockerfile
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes: 
+            - /app/node_modues
+            - .:/app
+    tests:
+        stdin_open: true # required to keep app running (a bug fix)
+        build: 
+            context: . # location of Dockerfile
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /app/node_modues
+            - .:/app   
+        command: ["npm", "run", "test"]
