@@ -10,5 +10,6 @@ RUN npm run build
 
 # this statement identifies the previous phase ended
 FROM nginx
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
 
